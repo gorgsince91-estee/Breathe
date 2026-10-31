@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estee</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #f4efe9;
+        --panel: #fbf7f2;
+        --panel-strong: #efe2d4;
+        --text: #2f261f;
+        --muted: #685d54;
+        --accent: #b98763;
+        --accent-deep: #8d6240;
+        --line: rgba(47, 38, 31, 0.12);
+        --shadow: 0 24px 60px rgba(87, 62, 45, 0.12);
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(180deg, #f7f2eb 0%, #f3ece5 100%);
+        color: var(--text);
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page-shell {
+        width: min(1200px, calc(100% - 32px));
+        margin: 32px auto;
+        background: rgba(255, 255, 255, 0.28);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 24px 48px;
+        background: rgba(255, 255, 255, 0.12);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brand {
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-size: 0.73rem;
+        font-weight: 700;
+      }
+
+      .nav {
+        display: flex;
+        gap: 22px;
+        font-size: 0.84rem;
+        color: var(--muted);
+      }
+
+      .nav a:hover {
+        color: var(--text);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 36px;
+        padding: 48px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(185, 135, 99, 0.12);
+        color: var(--accent-deep);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      h1 {
+        margin: 24px 0 18px;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(3.2rem, 5vw, 6rem);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+        font-weight: 600;
+      }
+
+      .lead {
+        margin: 0;
+        max-width: 560px;
+        color: var(--muted);
+        font-size: 1.08rem;
+        line-height: 1.8;
+      }
+
+      .cta-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 28px;
+      }
+
+      .primary-btn,
+      .secondary-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        padding: 0 22px;
+        border-radius: 999px;
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .primary-btn {
+        background: var(--text);
+        color: #fff;
+        box-shadow: 0 14px 28px rgba(28, 21, 18, 0.18);
+      }
+
+      .secondary-btn {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--line);
+      }
+
+      .primary-btn:hover,
+      .secondary-btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .visual {
+        position: relative;
+        display: flex;
+        justify-content: center;
+      }
+
+      .photo-frame {
+        width: min(100%, 430px);
+        aspect-ratio: 4 / 5.1;
+        max-height: 620px;
+        position: relative;
+        padding: 0;
+        border-radius: 30px;
+        background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(239,226,212,0.7));
+        border: 1px solid rgba(47, 38, 31, 0.08);
+        box-shadow: 0 18px 45px rgba(76, 58, 43, 0.15);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .photo-frame::before {
+        content: "";
+        position: absolute;
+        inset: 24px auto auto 24px;
+        width: 92px;
+        height: 92px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.35);
+        filter: blur(8px);
+        z-index: 0;
+      }
+
+      .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        border-radius: 30px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .floating-note {
+        position: absolute;
+        right: 12px;
+        bottom: 22px;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 16px 18px;
+        box-shadow: 0 14px 28px rgba(82, 62, 47, 0.12);
+      }
+
+      .floating-note strong {
+        display: block;
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .floating-note span {
+        display: block;
+        margin-top: 6px;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2rem;
+        line-height: 1;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+        padding: 10px 48px 48px;
+      }
+
+      .feature {
+        background: rgba(255,255,255,0.5);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 26px 22px;
+      }
+
+      .icon {
+        width: 46px;
+        height: 46px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 14px;
+        background: rgba(185, 135, 99, 0.12);
+        color: var(--accent-deep);
+        font-size: 1.3rem;
+        margin-bottom: 14px;
+      }
+
+      .feature h3 {
+        margin: 0 0 8px;
+        font-size: 1.15rem;
+      }
+
+      .feature p {
+        margin: 0;
+        line-height: 1.75;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .bottom-banner {
+        margin: 0 48px 48px;
+        padding: 28px 30px;
+        border-radius: 24px;
+        background: linear-gradient(135deg, #e9d6c1, #f5eee5);
+        border: 1px solid rgba(47,38,31,0.08);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .bottom-banner p {
+        margin: 0;
+        font-size: 1.04rem;
+        line-height: 1.6;
+        color: var(--text);
+      }
+
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .bottom-banner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .topbar {
+          padding: 18px 20px;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+
+        .nav {
+          flex-wrap: wrap;
+          gap: 10px 16px;
+        }
+
+        .hero,
+        .feature-grid,
+        .bottom-banner {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+
+        .photo-frame img {
+          height: 450px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand">Estee</div>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="#story">Story</a>
+          <a href="#notes">Notes</a>
+          <a href="#journal">Journal</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero" id="story">
+          <div>
+            <div class="eyebrow">A gentle reset</div>
+            <h1>A Little Adventure To Not Losing Your Spark</h1>
+            <p class="lead">
+              Just some gentle reminders to remember when life feels heavy and your energy starts fading.
+              Slow down, breathe, and choose the small things that bring you back to yourself.
+            </p>
+            <div class="cta-row">
+              <a class="primary-btn" href="#notes">Read the notes</a>
+              <a class="secondary-btn" href="#journal">See more</a>
+            </div>
+          </div>
+
+          <div class="visual" aria-label="Decorative lifestyle photo">
+            <div class="photo-frame">
+              <img src="https://scontent-mnl1-2.xx.fbcdn.net/v/t39.30808-6/470229363_1905376269954015_6326531146197988509_n.jpg?stp=dst-jpg_tt6&cstp=mx713x714&ctp=s713x714&_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeH6EZ-kFOOwcCmuCCG9MtH0E8Pt0e6oW_oTw-3R7qhb-toq53kSegSi32JSr72UpgEaXVwP9pnvwATV8op3Up-K&_nc_ohc=nzeV0qIiul8Q7kNvwHWQ6t5&_nc_oc=AdpqPfv9mmRtPnIeNXUSZs5YINd-SCljsNCiCbt-4bJvisw1Tyx6Kh780J3JwKj4XlE&_nc_zt=23&_nc_ht=scontent-mnl1-2.xx&_nc_gid=i23CAs5rAV8KaF6jncDEJQ&_nc_ss=7b2a8&oh=00_AQS1S8Tc_r--oKxc1PMwvie9P5gXH9F8VGLBsdSm2CGp1A&oe=6AEB6E45" alt="Woman smiling outdoors" />
+            </div>
+            <div class="floating-note">
+              <strong>Keep going</strong>
+              <span>Softly</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="feature-grid" id="notes">
+          <article class="feature">
+            <div class="icon">✦</div>
+            <h3>Pause</h3>
+            <p>When everything feels overwhelming, step away for a moment and let your mind catch its breath.</p>
+          </article>
+
+          <article class="feature">
+            <div class="icon">☼</div>
+            <h3>Recharge</h3>
+            <p>Let sunlight, fresh air, and quiet moments help restore the spark that still lives inside you.</p>
+          </article>
+
+          <article class="feature">
+            <div class="icon">❋</div>
+            <h3>Return</h3>
+            <p>Come back gentler, softer, and more honest with what you need to feel alive again.</p>
+          </article>
+        </section>
+
+        <div class="bottom-banner" id="journal">
+          <p>“Just some things to not do when you feel like everything gets overwhelming.”</p>
+          <a class="secondary-btn" href="#contact">Take a breath</a>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
